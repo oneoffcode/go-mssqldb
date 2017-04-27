@@ -6,7 +6,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"golang.org/x/net/context" // use the "x/net/context" for backwards compatibility.
 	"io"
 	"io/ioutil"
 	"net"
@@ -19,6 +18,7 @@ import (
 	"unicode"
 	"unicode/utf16"
 	"unicode/utf8"
+	"golang.org/x/net/context" // use the "x/net/context" for backwards compatibility.
 )
 
 func parseInstances(msg []byte) map[string]map[string]string {
@@ -1313,7 +1313,7 @@ initiate_connection:
 	var sspi_msg []byte
 continue_login:
 	tokchan := make(chan tokenStruct, 5)
-	go processResponse(context.Background(), &sess, tokchan)
+	go processResponse(context.Background(), &sess, tokchan, nil)
 	success := false
 	for tok := range tokchan {
 		switch token := tok.(type) {

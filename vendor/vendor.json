@@ -1,0 +1,17 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Pc6X/Yf5KZawnoiTOhlMwVFwkqM=",
+			"path": "database/sql",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "BOtrRVNaDuCOUbB6Sj43znABV7E=",
+			"path": "database/sql/driver",
+			"revision": ""
+		}
+	],
+	"rootPath": "github.com/denisenkom/go-mssqldb"
+}
