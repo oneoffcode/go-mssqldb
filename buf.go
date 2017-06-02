@@ -96,7 +96,7 @@ func (w *tdsBuffer) Write(p []byte) (total int, err error) {
 		copied := copy(w.wbuf[w.wpos:], p)
 		w.wpos += uint16(copied)
 		total += copied
-		if copied == len(p) {
+		if total == len(p) {
 			break
 		}
 		if err = w.flush(); err != nil {
