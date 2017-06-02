@@ -137,6 +137,7 @@ func (r *tdsBuffer) readNextPacket() error {
 	var err error
 	err = binary.Read(r.transport, binary.BigEndian, &header)
 	if err != nil {
+		log.Printf("Read transport:%v", err)
 		return err
 	}
 	offset := uint16(binary.Size(header))
@@ -148,6 +149,7 @@ func (r *tdsBuffer) readNextPacket() error {
 	}
 	_, err = io.ReadFull(r.transport, r.rbuf[offset:header.Size])
 	if err != nil {
+		log.Printf("ReadFull buffer (offset=%d, size=%d):%v", offset, header.Size, err)
 		return err
 	}
 	r.rpos = offset
