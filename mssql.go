@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"math"
 	"net"
 	"reflect"
@@ -317,6 +318,8 @@ func (s *MssqlStmt) Query(args []driver.Value) (driver.Rows, error) {
 
 func (s *MssqlStmt) queryContext(ctx context.Context, args []namedValue) (driver.Rows, error) {
 	if err := s.sendQuery(args); err != nil {
+		log.Printf("QUERY sendquery errir %v", err)
+
 		return nil, err
 	}
 	return s.processQueryResponse(ctx)
@@ -359,7 +362,7 @@ func (s *MssqlStmt) Exec(args []driver.Value) (driver.Result, error) {
 
 func (s *MssqlStmt) exec(ctx context.Context, args []namedValue) (driver.Result, error) {
 	if err := s.sendQuery(args); err != nil {
-		log.Printf("send errir %v", err)
+		log.Printf("EXEC sendquery errir %v", err)
 		return nil, err
 	}
 	return s.processExec(ctx)
