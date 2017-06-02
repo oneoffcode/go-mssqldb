@@ -86,7 +86,7 @@ func (w *tdsBuffer) flush() (err error) {
 
 	w.wpos = 8
 	// packet number
-	w.wbuf[6] += 1
+	//w.wbuf[6] += 1
 	return nil
 }
 
@@ -98,7 +98,6 @@ func (w *tdsBuffer) Write(p []byte) (total int, err error) {
 		total += copied
 		log.Printf("%d %d %d", total, copied, len(p))
 		if copied == len(p) {
-			err = w.flush()
 			break
 		}
 		if err = w.flush(); err != nil {
