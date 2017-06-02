@@ -75,6 +75,7 @@ func (w *tdsBuffer) flush() (err error) {
 
 	// writing packet into underlying transport
 	if _, err = w.transport.Write(w.wbuf[:w.wpos]); err != nil {
+		log.Printf("write xport %v", err)
 		return err
 	}
 
