@@ -96,7 +96,8 @@ func (w *tdsBuffer) Write(p []byte) (total int, err error) {
 		copied := copy(w.wbuf[w.wpos:], p)
 		w.wpos += uint16(copied)
 		total += copied
-		if total == len(p) {
+		log.Printf("%d %d %d", total, copied, len(p))
+		if copied == len(p) {
 			break
 		}
 		if err = w.flush(); err != nil {
