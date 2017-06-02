@@ -87,7 +87,7 @@ func (w *tdsBuffer) flush() (err error) {
 
 	w.wpos = 8
 	// packet number
-	//w.wbuf[6] += 1
+	w.wbuf[6] += 1
 	return nil
 }
 
