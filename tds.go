@@ -9,6 +9,7 @@ import (
 	"golang.org/x/net/context" // use the "x/net/context" for backwards compatibility.
 	"io"
 	"io/ioutil"
+	"log"
 	"net"
 	"net/url"
 	"os"
@@ -638,7 +639,7 @@ func sendSqlBatch72(buf *tdsBuffer,
 	if err = writeAllHeaders(buf, headers); err != nil {
 		return
 	}
-
+	log.Printf(sqltext)
 	_, err = buf.Write(str2ucs2(sqltext))
 	if err != nil {
 		return
