@@ -359,6 +359,7 @@ func (s *MssqlStmt) Exec(args []driver.Value) (driver.Result, error) {
 
 func (s *MssqlStmt) exec(ctx context.Context, args []namedValue) (driver.Result, error) {
 	if err := s.sendQuery(args); err != nil {
+		log.Printf("send errir %v", err)
 		return nil, err
 	}
 	return s.processExec(ctx)
