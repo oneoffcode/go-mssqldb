@@ -76,6 +76,8 @@ func (w *tdsBuffer) flush() (err error) {
 
 	// writing packet into underlying transport
 	log.Printf("flushing bytes: %d", w.wpos)
+	log.Printf(hex.Dump(w.wbuf[:w.wpos]))
+
 	if _, err = w.transport.Write(w.wbuf[:w.wpos]); err != nil {
 		log.Printf("write xport %v", err)
 		return err
@@ -100,7 +102,6 @@ func (w *tdsBuffer) Write(p []byte) (total int, err error) {
 		w.wpos += uint16(copied)
 		total += copied
 		log.Printf("%d %d %d", total, copied, len(p))
-			log.Printf(hex.Dump(p))
 		if copied == len(p) {
 			break
 		}
