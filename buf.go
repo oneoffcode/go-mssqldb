@@ -74,6 +74,7 @@ func (w *tdsBuffer) flush() (err error) {
 	binary.BigEndian.PutUint16(w.wbuf[2:], w.wpos)
 
 	// writing packet into underlying transport
+	log.Printf("flushing bytes: %d", w.wpos)
 	if _, err = w.transport.Write(w.wbuf[:w.wpos]); err != nil {
 		log.Printf("write xport %v", err)
 		return err
@@ -121,6 +122,7 @@ func (w *tdsBuffer) WriteByte(b byte) error {
 }
 
 func (w *tdsBuffer) BeginPacket(packet_type packetType) {
+	log.Printf("begin packet")
 	w.wbuf[0] = byte(packet_type)
 	w.wbuf[1] = 0 // packet is incomplete
 	w.wbuf[4] = 0 // spid
@@ -131,6 +133,7 @@ func (w *tdsBuffer) BeginPacket(packet_type packetType) {
 }
 
 func (w *tdsBuffer) FinishPacket() error {
+	log.Printf("finish packet")
 	w.wbuf[1] = 1 // this is last packet
 	return w.flush()
 }
