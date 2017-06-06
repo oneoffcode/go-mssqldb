@@ -122,7 +122,7 @@ func (w *tdsBuffer) WriteByte(b byte) error {
 }
 
 func (w *tdsBuffer) BeginPacket(packet_type packetType) {
-	log.Printf("begin packet")
+	log.Printf("begin packet %d", byte(packet_type))
 	w.wbuf[0] = byte(packet_type)
 	w.wbuf[1] = 0 // packet is incomplete
 	w.wbuf[4] = 0 // spid
