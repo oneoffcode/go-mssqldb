@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io"
 	"log"
+	"encoding/hex"
 )
 
 type packetType uint8
@@ -99,6 +100,9 @@ func (w *tdsBuffer) Write(p []byte) (total int, err error) {
 		w.wpos += uint16(copied)
 		total += copied
 		log.Printf("%d %d %d", total, copied, len(p))
+		if len(p)<30 {
+			log.Printf(hex.Dump(p))
+		}
 		if copied == len(p) {
 			break
 		}
